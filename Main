@@ -1,0 +1,60 @@
+.headers on
+.mode column
+.mode line
+
+PRAGMA foreign_keys = ON;
+CREATE TABLE Restaurants (
+  Restaurant_id INTEGER NOT NULL PRIMARY KEY,
+  name TEXT,
+  imageLink TEXT
+);
+  
+ CREATE TABLE Menu (
+  Menu_id INTEGER NOT NULL PRIMARY KEY,
+  nameOfMenu TEXT,
+  Restaurant_id INTEGER NOT NULL,  
+  FOREIGN KEY(Restaurant_id) REFERENCES Restaurants(Restaurant_id)
+ );
+ 
+ CREATE TABLE MenuItems (
+  menuItem_id INTEGER NOT NULL PRIMARY KEY,
+  nameOfItem TEXT,
+  price INTEGER,
+  Menu_id INTEGER NOT NULL,
+  FOREIGN KEY(Menu_id) REFERENCES Menu(Menu_id)
+);
+
+
+INSERT INTO Restaurants (name) VALUES
+("The Great Cow"),
+("Recline and Dine");
+
+
+
+INSERT INTO Menu (nameOfMenu,Restaurant_id) VALUES
+("Breakfast Menu", 1),
+("Lunch Menu",1),
+("Evening Menu",2),
+("Drinks Menu",2),
+("Sunday Menu",2);
+
+INSERT INTO MenuItems (nameOfItem, price, Menu_id) VALUES
+("Bacon & Eggs", 500.00,1),
+("Hash Browns",600.00,1),
+("Grilled Cheese Sandwich", 400.00,2),
+("Lamb Sheekh Kebab",1500.00,3),
+("1 pint of Guinness",700.00,4),
+("Half pint of Strongbow",45500.00,4),
+("Roast Chicken",600.00,5);
+
+-- SELECT * FROM MenuItems;
+
+SELECT Restaurants.name AS "Restaurant Name", Menu.nameOfMenu AS "Menu Name", MenuItems.nameOfItem AS "Menu Item Name", MenuItems.price /100.00 AS "Menu Item Price" 
+FROM Restaurants
+JOIN Menu ON
+Restaurants.Restaurant_id = Menu.Restaurant_id
+JOIN MenuItems ON
+Menu.Menu_id = MenuItems.Menu_id
+WHERE Restaurants.name = "The Great Cow"
+AND Menu.nameOfMenu = "Breakfast Menu"
+
