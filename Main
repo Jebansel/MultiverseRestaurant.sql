@@ -58,3 +58,14 @@ Menu.Menu_id = MenuItems.Menu_id
 WHERE Restaurants.name = "The Great Cow"
 AND Menu.nameOfMenu = "Breakfast Menu"
 
+SELECT Restaurants.name AS "Restaurant Name",
+Menu.nameOfMenu AS "Menu Name",
+MenuItems.nameOfItem AS "Menu Item Name",
+printf("%.2f", MenuItems.price / 100.0) AS "Menu Item Price" 
+FROM Restaurants
+JOIN Menu ON
+Restaurants.Restaurant_id = Menu.Restaurant_id
+JOIN MenuItems ON
+Menu.Menu_id = MenuItems.Menu_id
+WHERE Restaurants.name = "Recline and Dine"
+AND Menu.nameOfMenu = "Drinks Menu";
