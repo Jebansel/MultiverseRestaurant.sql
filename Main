@@ -69,3 +69,10 @@ JOIN MenuItems ON
 Menu.Menu_id = MenuItems.Menu_id
 WHERE Restaurants.name = "Recline and Dine"
 AND Menu.nameOfMenu = "Drinks Menu";
+
+SELECT Restaurants.name AS "Restaurant Name", 
+COUNT(Menu_id) AS "Number of Menus"
+FROM Restaurants
+JOIN Menu
+ON Restaurants.Restaurant_id = Menu.Restaurant_id 
+GROUP BY Restaurants.Restaurant_id; -- Same as doing it by using FROM Restaurants, Menu 
