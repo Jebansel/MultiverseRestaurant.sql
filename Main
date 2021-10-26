@@ -76,3 +76,10 @@ FROM Restaurants
 JOIN Menu
 ON Restaurants.Restaurant_id = Menu.Restaurant_id 
 GROUP BY Restaurants.Restaurant_id; -- Same as doing it by using FROM Restaurants, Menu 
+
+SELECT Menu.nameOfMenu AS "Name of Menu", 
+SUM(MenuItems.price) AS "Total Cost of Menu"
+FROM Menu, MenuItems
+WHERE Menu.Menu_id= MenuItems.Menu_id
+GROUP BY Menu.nameOfMenu
+ORDER BY SUM(MenuItems.price) DESC;
